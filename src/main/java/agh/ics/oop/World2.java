@@ -33,9 +33,9 @@ public class World2{
 
         Direction[] pom = new Direction[cnt];
         int j = 0;
-        for(int i=0; i<m; i++){
+        for (String arg : args) {
 
-            switch (args[i]) {
+            switch (arg) {
                 case "f":
                     pom[j] = Direction.valueOf("FORWARD");
                     j++;

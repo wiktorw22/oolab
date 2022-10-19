@@ -1,11 +1,5 @@
 package agh.ics.oop;
 
-//public class Main {
-//public static void main(String[] args) {
-//System.out.println("Hello world!");
-//}
-//}
-
 import java.util.Objects;
 
 public class Vector2d {
@@ -30,16 +24,10 @@ public class Vector2d {
         return "(" + x + ", " + y + ")";
     }
     boolean precedes(Vector2d other){
-        if(this.x <= other.x && this.y <= other.y){
-            return true;
-        }
-        return false;
+        return this.x <= other.x && this.y <= other.y;
     }
     boolean follows(Vector2d other){
-        if(this.x >= other.x && this.y >= other.y){
-            return true;
-        }
-        return false;
+        return this.x >= other.x && this.y >= other.y;
     }
     public Vector2d add(Vector2d other){
         return new Vector2d(this.x + other.x, this.y + other.y);
@@ -50,58 +38,28 @@ public class Vector2d {
     public Vector2d upperRight(Vector2d other){
         int max_x;
         int max_y;
-        if(this.x > other.x){
-            max_x = this.x;
-        }
-        else{
-            max_x = other.x;
-        }
-        if(this.y > other.y){
-            max_y = this.y;
-        }
-        else{
-            max_y = other.y;
-        }
+        max_x = Math.max(this.x, other.x);
+        max_y = Math.max(this.y, other.y);
         return new Vector2d(max_x, max_y);
     }
     public Vector2d lowerLeft(Vector2d other){
         int min_x;
         int min_y;
-        if(this.x < other.x){
-            min_x = this.x;
-        }
-        else{
-            min_x = other.x;
-        }
-        if(this.y < other.y){
-            min_y = this.y;
-        }
-        else{
-            min_y = other.y;
-        }
+        min_x = Math.min(this.x, other.x);
+        min_y = Math.min(this.y, other.y);
         return new Vector2d(min_x, min_y);
     }
     public Vector2d opposite(){
         return new Vector2d(-this.x, -this.y);
     }
-    public boolean equals(Object other){
-        if (this == other) {
-            return true;
-        }
-        if (!(other instanceof Vector2d)) {
-            return false;
-        }
-        Vector2d that = (Vector2d) other;
-        // tutaj przeprowadzane jest faktyczne porównanie
-        if (this.x == that.x && this.y == that.y) {
-            return true;
-        }
-        else{
-            return false;
-        }
 
-
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        else if (!(other instanceof Vector2d)) return false;
+        else return this.x == ((Vector2d) other).x && this.y == ((Vector2d) other).y;
     }
+    @Override
     public int hashCode() { return Objects.hash(x, y); }
 
 }
