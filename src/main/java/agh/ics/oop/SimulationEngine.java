@@ -15,10 +15,7 @@ public class SimulationEngine implements IEngine {
         int m = directions.length;
         int cnt = 0;
         for(int i = 0; i < n; i++){
-            if(!(map.place(new AnimalLab4(map, positions[i])))){
-                positions[i] = null;
-            }
-            else {
+            if(map.place(new AnimalLab4(map, positions[i]))) {
                 map.place(new AnimalLab4(map, positions[i]));
                 cnt++;
             }
@@ -32,3 +29,4 @@ public class SimulationEngine implements IEngine {
         }
     }
 }
+

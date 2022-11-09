@@ -7,7 +7,7 @@ package agh.ics.oop;
  * @author apohllo
  *
  */
-public interface IWorldMap {
+public interface IWorldMapLab4 {
     /**
      * Indicate if any object can move to the given position.
      *
@@ -26,7 +26,7 @@ public interface IWorldMap {
      */
     //boolean place(Animal animal);
 
-    boolean place(AnimalLab5 animal);
+    boolean place(AnimalLab4 animal);
 
     /**
      * Return true if given position on the map is occupied. Should not be

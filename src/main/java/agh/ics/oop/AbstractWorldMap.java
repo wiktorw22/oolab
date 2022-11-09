@@ -3,23 +3,23 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RectangularMap implements IWorldMapLab4 {
+abstract class AbstractWorldMap implements IWorldMapAbstract {
+    protected List<AnimalLab5Abstract> animals;
     private final int mapWidth;
     private final int mapHeight;
-    List<AnimalLab4> animals;
-    public RectangularMap(int mapWidth, int mapHeight){
+    public AbstractWorldMap(int mapWidth, int mapHeight){
+        animals = new ArrayList<>();
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
-        animals = new ArrayList<>();
     }
-    public List<AnimalLab4> getAnimalsArray(){
+    public List<AnimalLab5Abstract> getAnimalsArray(){
         return animals; //getter
     }
     public int getMapWidth(){
-        return this.mapWidth;
+        return mapWidth; //getter
     }
     public int getMapHeight(){
-        return this.mapHeight;
+        return mapHeight; //getter
     }
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -30,7 +30,7 @@ public class RectangularMap implements IWorldMapLab4 {
     }
 
     @Override
-    public boolean place(AnimalLab4 animal) {
+    public boolean place(AnimalLab5Abstract animal) {
         if(canMoveTo(animal.getAnimalPosition())){
             animals.add(animal);
             return true;
@@ -40,7 +40,7 @@ public class RectangularMap implements IWorldMapLab4 {
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        for (AnimalLab4 animal : animals) {
+        for (AnimalLab5Abstract animal : animals) {
             if(animal.getAnimalPosition().equals(position)){
                 return true;
             }
@@ -49,9 +49,9 @@ public class RectangularMap implements IWorldMapLab4 {
     }
 
     @Override
-    public AnimalLab4 objectAt(Vector2d position) {
+    public AnimalLab5Abstract objectAt(Vector2d position) {
         if(isOccupied(position)){
-            for (AnimalLab4 animal : animals) {
+            for (AnimalLab5Abstract animal : animals) {
                 if(animal.getAnimalPosition().equals(position)){
                     return animal;
                 }
@@ -60,7 +60,22 @@ public class RectangularMap implements IWorldMapLab4 {
         return null;
     }
     public String toString(){
-        return new MapVisualizerLab4(this).draw(new Vector2d(0, 0), new Vector2d(mapWidth - 1, mapHeight - 1));
+        return new MapVisualizerAbstract(this).draw(new Vector2d(0, 0), getMaxPositionOnMap());
     }
+    abstract Vector2d getMaxPositionOnMap();
+
+    abstract int getGrassNumber();
+    abstract boolean isOccupiedGrass(Vector2d position);
+    abstract boolean canMoveToGrass(Vector2d position);
+    abstract boolean placeGrass(Grass grass);
+    abstract Grass objectAtGrass(Vector2d position);
+    abstract Vector2d getMinPositionOnMap();
+    //abstract Vector2d getMaxPositionOnMap();
+    //public String toString(){return new MapVisualizerGrass(this).draw(new Vector2d(0, 0), getMaxPositionOnMap());
+
+
 }
+
+
+
 

@@ -1,29 +1,30 @@
+/*
 package agh.ics.oop;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RectangularMap implements IWorldMapLab4 {
-    private final int mapWidth;
-    private final int mapHeight;
+public class RectangularMapLab5 implements IWorldMap {
+    //private final int mapWidth;
+    //private final int mapHeight;
     List<AnimalLab4> animals;
-    public RectangularMap(int mapWidth, int mapHeight){
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
+    public RectangularMapLab5(int mapWidth, int mapHeight){
+        //this.mapWidth = mapWidth;
+        //this.mapHeight = mapHeight;
         animals = new ArrayList<>();
     }
     public List<AnimalLab4> getAnimalsArray(){
         return animals; //getter
     }
-    public int getMapWidth(){
-        return this.mapWidth;
-    }
-    public int getMapHeight(){
-        return this.mapHeight;
-    }
+    //public int getMapWidth(){
+    //    return this.mapWidth;
+    //}
+    //public int getMapHeight(){
+    //    return this.mapHeight;
+    //}
     @Override
     public boolean canMoveTo(Vector2d position) {
-        if(position.x >= 0 && position.x < mapWidth && position.y >= 0 && position.y < mapHeight){
+        if(position.x >= 0 && position.y >= 0){
             return !this.isOccupied(position);
         }
         return false;
@@ -60,7 +61,7 @@ public class RectangularMap implements IWorldMapLab4 {
         return null;
     }
     public String toString(){
-        return new MapVisualizerLab4(this).draw(new Vector2d(0, 0), new Vector2d(mapWidth - 1, mapHeight - 1));
+        return new MapVisualizer(this).draw(new Vector2d(0, 0), new Vector2d((int) Double.POSITIVE_INFINITY, (int)Double.POSITIVE_INFINITY));
     }
 }
-
+ */

@@ -6,22 +6,20 @@ package agh.ics.oop;
  *
  * @author apohllo
  */
-/*
-public class MapVisualizer {
+public class MapVisualizerGrass {
     private static final String EMPTY_CELL = " ";
     private static final String FRAME_SEGMENT = "-";
     private static final String CELL_SEGMENT = "|";
-    private RectangularMapLab5 map;
-*/
+    private GrassField map;
+
     /**
      * Initializes the MapVisualizer with an instance of map to visualize.
      * @param map
      */
-    /*
-    public MapVisualizer(RectangularMapLab5 map) {
+    public MapVisualizerGrass(GrassField map) {
         this.map = map;
     }
-    */
+
     /**
      * Convert selected region of the map into a string. It is assumed that the
      * indices of the map will have no more than two characters (including the
@@ -31,7 +29,6 @@ public class MapVisualizer {
      * @param upperRight The upper right corner of the region that is drawn.
      * @return String representation of the selected region of the map.
      */
-    /*
     public String draw(Vector2d lowerLeft, Vector2d upperRight) {
         StringBuilder builder = new StringBuilder();
         for (int i = upperRight.y + 1; i >= lowerLeft.y - 1; i--) {
@@ -45,7 +42,13 @@ public class MapVisualizer {
                 } else {
                     builder.append(CELL_SEGMENT);
                     if (j <= upperRight.x) {
-                        builder.append(drawObject(new Vector2d(j, i)));
+                        if (drawObjectAnimal(new Vector2d(j, i)) != EMPTY_CELL && drawObjectAnimal(new Vector2d(j, i)) != null) {
+                            builder.append(drawObjectAnimal(new Vector2d(j, i)));
+                            builder.append(drawObjectGrass(new Vector2d(j, i)));
+                        }
+                        else{
+                            builder.append(drawObjectGrass(new Vector2d(j, i)));
+                        }
                     }
                 }
             }
@@ -72,10 +75,10 @@ public class MapVisualizer {
         return builder.toString();
     }
 
-    private String drawObject(Vector2d currentPosition) {
+    private String drawObjectAnimal(Vector2d currentPosition) {
         String result = null;
         if (this.map.isOccupied(currentPosition)) {
-            AnimalLab4 object = this.map.objectAt(currentPosition);
+            AnimalLab5 object = this.map.objectAt(currentPosition);
             if (object != null) {
                 result = object.toString(object.getAnimalOrientation());
             } else {
@@ -86,5 +89,18 @@ public class MapVisualizer {
         }
         return result;
     }
+    private String drawObjectGrass(Vector2d currentPosition) {
+        String result = null;
+        if (this.map.isOccupiedGrass(currentPosition)) {
+            Grass object = this.map.objectAtGrass(currentPosition);
+            if (object != null) {
+                result = object.toString();
+            } else {
+                result = EMPTY_CELL;
+            }
+        } else {
+            result = EMPTY_CELL;
+        }
+        return result;
+    }
 }
-     */

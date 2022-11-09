@@ -1,11 +1,11 @@
 package agh.ics.oop;
 
-public class AnimalLab4 {
+public class AnimalLab5 {
     public final MapDirection orientation_start = MapDirection.NORTH;
     private MapDirection orientation;
     private Vector2d position;
-    private RectangularMap animalMap;
-    public AnimalLab4(RectangularMap map, Vector2d position){
+    private GrassField animalMap;
+    public AnimalLab5(GrassField map, Vector2d position){
         this.animalMap = map;
         this.position = position;
         this.orientation = orientation_start;
@@ -17,7 +17,7 @@ public class AnimalLab4 {
     public MapDirection getAnimalOrientation(){
         return orientation;
     }
-    public RectangularMap getAnimalMap(){
+    public GrassField getAnimalMap(){
         return animalMap;
     }
     public String toString(MapDirection orientation){
@@ -66,4 +66,3 @@ public class AnimalLab4 {
     }
 
 }
-
