@@ -1,3 +1,4 @@
+/*
 package agh.ics.oop;
 
 public class WorldGrassFieldLab5 {
@@ -13,3 +14,5 @@ public class WorldGrassFieldLab5 {
 
     }
 }
+
+ */

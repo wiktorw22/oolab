@@ -3,25 +3,21 @@ package agh.ics.oop;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GrassFieldAbstract extends AbstractWorldMapLab6 {
+public class GrassFieldAbstractLab6 extends AbstractWorldMapLab6 {
     private final int grassNumber;
-    //List<Grass> grasses;
     Map<Vector2d, Grass> grasses;
-    public GrassFieldAbstract(int mapWidth, int mapHeight, int grassNumber) {
+    public GrassFieldAbstractLab6(int mapWidth, int mapHeight, int grassNumber) {
         super(mapWidth, mapHeight); //za te wymiary nalezy przyjac nieskonczonosc!!!
         this.grassNumber = grassNumber; //liczba kepek trawy na mapie/planszy
-        animals = new HashMap<>(); //slownik/hashmapa kepek trawy na mapie/planszy
+        grasses = new HashMap<>(); //lista kepek trawy na mapie/planszy
     }
     public int getGrassNumber(){
         return this.grassNumber;
     }
     public boolean isOccupiedGrass(Vector2d position){
-        for (Grass grass : grasses.values()) {
-            if(grass.getPosition().equals(position)){
-                return true;
-            }
-        }
-        return false;
+
+       return grasses.containsKey(position);
+
     }
     public boolean canMoveToGrass(Vector2d position){
         if(position.x >= 0 && position.x <= Math.sqrt((this.grassNumber)*10) && position.y >= 0 && position.y <= Math.sqrt((this.grassNumber)*10)){
@@ -38,11 +34,7 @@ public class GrassFieldAbstract extends AbstractWorldMapLab6 {
     }
     public Grass objectAtGrass(Vector2d position){
         if(isOccupiedGrass(position)){
-            for (Grass grass : grasses.values()) {
-                if(grass.getPosition().equals(position)){
-                    return grass;
-                }
-            }
+            return (grasses.get(position));
         }
         return null;
     }

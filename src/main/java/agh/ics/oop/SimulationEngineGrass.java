@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class SimulationEngineGrass implements IEngine {
     MoveDirection[] directions;
-    GrassField map;
+    GrassFieldAbstractLab6 map;
     Vector2d[] positions;
-    public SimulationEngineGrass(MoveDirection[] directions, GrassField map, Vector2d[] positions){
+    public SimulationEngineGrass(MoveDirection[] directions, GrassFieldAbstractLab6 map, Vector2d[] positions){
         this.directions = directions;
         this.map = map;
         this.positions = positions;
@@ -29,12 +29,34 @@ public class SimulationEngineGrass implements IEngine {
         int n = positions.length;
         int m = directions.length;
         int cnt = 0;
+        boolean[] logic = new boolean[n];
         for(int i = 0; i < n; i++){
-            if(map.place(new AnimalLab5(map, positions[i]))) {
-                map.place(new AnimalLab5(map, positions[i]));
+            AnimalLab6Abstract tmp = new AnimalLab6Abstract(map, positions[i]);
+            if(map.place(tmp)) {
+                map.place(tmp);
+                tmp.addObserver(map);
+                logic[i] = true;
                 cnt++;
             }
+            else{
+                logic[i] = false;
+            }
         }
+        Vector2d[] pom = new Vector2d[cnt];
+        int j = 0;
+        for(int i = 0; i < n; i++){
+            if(logic[i]) {
+                //AnimalLab6Abstract tmp = new AnimalLab6Abstract(map, positions[i]);
+                //map.place(tmp);
+                //tmp.addObserver(map);
+                //cnt++;
+                pom[j] = positions[i]; //tmp.getAnimalPosition();
+                j++;
+            }
+        }
+        //stworzyc slownik, do ktorego wstawimy zwierzaki wraz z tablica ich kolejnych ruchow
+        //Map<AnimalLab6Abstract, > movesAnimal = new HashMap<>();
+        /*
         for(int i = 0; i < m; i++){
             int idx = i;
             if(idx >= cnt){
@@ -42,5 +64,19 @@ public class SimulationEngineGrass implements IEngine {
             }
             map.animals.get(idx).move(directions[i]);
         }
+         */
+        for(int i = 0; i < m; i++){
+            int idx = i;
+            if(idx >= cnt){
+                idx = idx % cnt;
+            }
+            Vector2d prevPosition = pom[idx];
+            AnimalLab6Abstract animalPom = map.animals.get(prevPosition);
+            animalPom.move(directions[i]);
+            Vector2d nextPosition = animalPom.getAnimalPosition();
+            pom[idx] = nextPosition;
+            animalPom.positionChanged(prevPosition, nextPosition);
+        }
+
     }
 }

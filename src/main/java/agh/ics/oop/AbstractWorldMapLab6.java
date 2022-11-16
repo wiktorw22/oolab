@@ -1,19 +1,19 @@
-/*
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+//import java.util.List;
+import java.util.Map;
 
-abstract class AbstractWorldMap implements IWorldMapAbstract {
-    protected List<AnimalLab5Abstract> animals;
+abstract class AbstractWorldMapLab6 implements IWorldMapAbstract, IPositionChangeObserver {
+    protected Map<Vector2d, AnimalLab6Abstract> animals;
     private final int mapWidth;
     private final int mapHeight;
-    public AbstractWorldMap(int mapWidth, int mapHeight){
-        animals = new ArrayList<>();
+    public AbstractWorldMapLab6(int mapWidth, int mapHeight){
+        animals = new HashMap<>();
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
     }
-    public List<AnimalLab5Abstract> getAnimalsArray(){
+    public Map<Vector2d, AnimalLab6Abstract> getAnimalsHashMap(){
         return animals; //getter
     }
     public int getMapWidth(){
@@ -31,9 +31,9 @@ abstract class AbstractWorldMap implements IWorldMapAbstract {
     }
 
     @Override
-    public boolean place(AnimalLab5Abstract animal) {
+    public boolean place(AnimalLab6Abstract animal) {
         if(canMoveTo(animal.getAnimalPosition())){
-            animals.add(animal);
+            animals.put(animal.getAnimalPosition(), animal);
             return true;
         }
         return false;
@@ -41,27 +41,22 @@ abstract class AbstractWorldMap implements IWorldMapAbstract {
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        for (AnimalLab5Abstract animal : animals) {
-            if(animal.getAnimalPosition().equals(position)){
-                return true;
-            }
-        }
-        return false;
+
+        return animals.containsKey(position);
     }
 
     @Override
-    public AnimalLab5Abstract objectAt(Vector2d position) {
+    public AnimalLab6Abstract objectAt(Vector2d position) {
         if(isOccupied(position)){
-            for (AnimalLab5Abstract animal : animals) {
-                if(animal.getAnimalPosition().equals(position)){
-                    return animal;
-                }
-            }
+
+            return (animals.get(position));
+
+
         }
         return null;
     }
     public String toString(){
-        return new MapVisualizerAbstract(this).draw(new Vector2d(0, 0), getMaxPositionOnMap());
+        return new MapVisualizerAbstractLab6(this).draw(new Vector2d(0, 0), getMaxPositionOnMap());
     }
     abstract Vector2d getMaxPositionOnMap();
 
@@ -73,11 +68,17 @@ abstract class AbstractWorldMap implements IWorldMapAbstract {
     abstract Vector2d getMinPositionOnMap();
     //abstract Vector2d getMaxPositionOnMap();
     //public String toString(){return new MapVisualizerGrass(this).draw(new Vector2d(0, 0), getMaxPositionOnMap());
-
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+        AnimalLab6Abstract animal1 = animals.get(oldPosition);
+        //AbstractWorldMapLab6 mapAnimal = animal1.getAnimalMap();
+        animals.remove(oldPosition, animal1);
+        //AnimalLab6Abstract animal2 = new AnimalLab6Abstract(mapAnimal, newPosition);
+        animal1.setAnimalPosition(newPosition);
+        animals.put(newPosition, animal1);
+    }
 
 }
-
- */
 
 
 

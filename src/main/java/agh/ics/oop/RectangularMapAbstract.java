@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-abstract class RectangularMapAbstract extends AbstractWorldMap {
+abstract class RectangularMapAbstract extends AbstractWorldMapLab6 {
 
     public RectangularMapAbstract(int mapWidth, int mapHeight) {
         super(mapWidth, mapHeight);

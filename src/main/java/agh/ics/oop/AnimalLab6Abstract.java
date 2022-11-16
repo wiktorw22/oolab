@@ -1,12 +1,15 @@
-/*
 package agh.ics.oop;
 
-public class AnimalLab5Abstract {
+import java.util.ArrayList;
+import java.util.List;
+
+public class AnimalLab6Abstract {
     public final MapDirection orientation_start = MapDirection.NORTH;
     private MapDirection orientation;
     private Vector2d position;
-    private AbstractWorldMap animalMap;
-    public AnimalLab5Abstract(AbstractWorldMap map, Vector2d position){
+    private AbstractWorldMapLab6 animalMap;
+    List<IPositionChangeObserver> observers = new ArrayList<>(); //lista obserwatorow
+    public AnimalLab6Abstract(AbstractWorldMapLab6 map, Vector2d position){
         this.animalMap = map;
         this.position = position;
         this.orientation = orientation_start;
@@ -15,10 +18,11 @@ public class AnimalLab5Abstract {
     public Vector2d getAnimalPosition(){
         return position;
     }
+    public void setAnimalPosition(Vector2d newPosition){ this.position = newPosition; } //setter
     public MapDirection getAnimalOrientation(){
         return orientation;
     }
-    public AbstractWorldMap getAnimalMap(){
+    public AbstractWorldMapLab6 getAnimalMap(){
         return animalMap;
     }
     public String toString(MapDirection orientation){
@@ -65,7 +69,15 @@ public class AnimalLab5Abstract {
         }
 
     }
-
+    public void addObserver(IPositionChangeObserver observer){
+        observers.add(observer);
+    }
+    public void removeObserver(IPositionChangeObserver observer){
+        observers.remove(observer);
+    }
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+        for(IPositionChangeObserver observer : observers){
+            observer.positionChanged(oldPosition, newPosition);
+        }
+    }
 }
-
- */

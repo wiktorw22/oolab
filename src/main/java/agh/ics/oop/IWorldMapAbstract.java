@@ -26,7 +26,7 @@ public interface IWorldMapAbstract {
      */
     //boolean place(Animal animal);
 
-    boolean place(AnimalLab5Abstract animal);
+    boolean place(AnimalLab6Abstract animal);
 
     /**
      * Return true if given position on the map is occupied. Should not be

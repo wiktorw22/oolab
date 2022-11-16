@@ -1,4 +1,3 @@
-/*
 package agh.ics.oop;
 
 /**
@@ -7,22 +6,19 @@ package agh.ics.oop;
  *
  * @author apohllo
  */
-/*
-public class MapVisualizerAbstract {
+public class MapVisualizerAbstractLab6 {
     private static final String EMPTY_CELL = " ";
     private static final String FRAME_SEGMENT = "-";
     private static final String CELL_SEGMENT = "|";
-    private AbstractWorldMap map;
+    private AbstractWorldMapLab6 map;
 
     /**
      * Initializes the MapVisualizer with an instance of map to visualize.
      * @param map
      */
-/*
-    public MapVisualizerAbstract(AbstractWorldMap map) {
+    public MapVisualizerAbstractLab6(AbstractWorldMapLab6 map) {
         this.map = map;
     }
-    */
 
     /**
      * Convert selected region of the map into a string. It is assumed that the
@@ -33,7 +29,6 @@ public class MapVisualizerAbstract {
      * @param upperRight The upper right corner of the region that is drawn.
      * @return String representation of the selected region of the map.
      */
-    /*
     public String draw(Vector2d lowerLeft, Vector2d upperRight) {
         StringBuilder builder = new StringBuilder();
         for (int i = upperRight.y + 1; i >= lowerLeft.y - 1; i--) {
@@ -83,7 +78,7 @@ public class MapVisualizerAbstract {
     private String drawObjectAnimal(Vector2d currentPosition) {
         String result = null;
         if (this.map.isOccupied(currentPosition)) {
-            AnimalLab5Abstract object = this.map.objectAt(currentPosition);
+            AnimalLab6Abstract object = this.map.objectAt(currentPosition);
             if (object != null) {
                 result = object.toString(object.getAnimalOrientation());
             } else {
@@ -109,4 +104,3 @@ public class MapVisualizerAbstract {
         return result;
     }
 }
-*/
